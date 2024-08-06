@@ -59,6 +59,7 @@ function App() {
     
     options.imagePaths = paths;
     options.forceSize = forceSize;
+    console.log(options);
     const response = await fetch(
       'http://localhost:4000/image-pdf/convert-to-pdf',
       {
@@ -141,7 +142,7 @@ function App() {
             <div className="img-tmp-container">
               <div className="img-block">
                 <div className="img">
-                  <img src="./template.jpg" />
+                  <img src="/public/template.jpg" />
                 </div>
               </div>
               <b>Fotografía de página completa</b>
@@ -158,8 +159,8 @@ function App() {
             <div className="img-tmp-container">
               <div className="img-block">
                 <div className="img img1">
-                  <img src="./template.jpg" />
-                  <img src="./template.jpg" />
+                  <img src="/public/template.jpg" />
+                  <img src="/public/template.jpg" />
                 </div>
               </div>
               <b>13 x 18 cm. (2)</b>
@@ -176,7 +177,7 @@ function App() {
             <div className="img-tmp-container">
               <div className="img-block">
                 <div className="img img2">
-                  <img src="./template.jpg" />
+                  <img src="/public/template.jpg" />
                 </div>
               </div>
               <b>20 x 25 cm. (1)</b>
@@ -193,8 +194,8 @@ function App() {
             <div className="img-tmp-container">
               <div className="img-block">
                 <div className="img img3">
-                  <img src="./template.jpg" />
-                  <img src="./template.jpg" />
+                  <img src="/public/template.jpg" />
+                  <img src="/public/template.jpg" />
                 </div>
               </div>
               <b>10 x 15 cm. (2)</b>
@@ -212,10 +213,10 @@ function App() {
               <div className="img-block">
                 <div className="img img4">
                   <div className="img-block4-grid">
-                    <img src="./template.jpg" />
-                    <img src="./template.jpg" />
-                    <img src="./template.jpg" />
-                    <img src="./template.jpg" />
+                    <img src="/public/template.jpg" />
+                    <img src="/public/template.jpg" />
+                    <img src="/public/template.jpg" />
+                    <img src="/public/template.jpg" />
                   </div>
                 </div>
               </div>
@@ -237,7 +238,7 @@ function App() {
                     {
                       //6 x 8.5cm
                       Array.from({ length: 9 }).map((_, i) => {
-                        return <img key={i} src="./template.jpg" />;
+                        return <img key={i} src="/public/template.jpg" />;
                       })
                     }
                   </div>
@@ -261,7 +262,7 @@ function App() {
                     {
                       //6 x 8.5cm
                       Array.from({ length: 35 }).map((_, i) => {
-                        return <img key={i} src="./template.jpg" />;
+                        return <img key={i} src="/public/template.jpg" />;
                       })
                     }
                   </div>

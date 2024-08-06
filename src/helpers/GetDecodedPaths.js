@@ -11,7 +11,7 @@ export const getDecodedPaths = (code) => {
   // );
   const decoded = decodeURIComponent(code);
   let cleanDecoded = decoded;
-  cleanDecoded = replacer(cleanDecoded, '\n\n\n\n\n\n\r\n', '');
-  cleanDecoded = replacer(cleanDecoded, '\n\n\n\n\n\n', '');
+  cleanDecoded = replacer(cleanDecoded, '\n', '');
+  cleanDecoded = replacer(cleanDecoded, '\r', '');
   return cleanDecoded.split('>');
 };
