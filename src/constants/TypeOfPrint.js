@@ -1,7 +1,7 @@
 export const TypeOfPrintMapping = {
   1: {
-    maxHeight: 19,
-    maxWidth: 27.7,
+    maxHeight: 20,
+    maxWidth: 28.7,
     isVertical: false,
   },
   2: {
