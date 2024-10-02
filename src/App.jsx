@@ -16,9 +16,10 @@ function App() {
   const [isVertical, setIsVertical] = useState(true);
   const [customHeight, setCustomHeight] = useState('');
   const [customWidth, setCustomWidth] = useState('');
+  const [n_copies, setNCopies] = useState(1);
   const finalWidth = isVertical ? A4WIDTH_DEF : A4HEIGTH_DEF;
   const finalHeight = isVertical ? A4HEIGTH_DEF : A4WIDTH_DEF;
-  const getNumericHandleChange = (max, setter) => (e) => {
+  const getNumericHandleChange = (max, setter, min=0) => (e) => {
     const inputValue = e.target.value;
     if (inputValue === '') {
       setter('');
@@ -39,7 +40,7 @@ function App() {
       e.preventDefault();
       return;
     }
-    if (numericValue < 0) {
+    if (numericValue < min) {
       e.preventDefault();
       return;
     }
@@ -51,13 +52,20 @@ function App() {
   };
   const paths = getDecodedPaths(imagePaths);
   const postConvertImages = async () => {
-    const options = custom ? {
-      maxHeight: customHeight,
-      maxWidth: customWidth,
-      isVertical,
-    } : TypeOfPrintMapping[selectedItem];
-    
-    options.imagePaths = paths;
+    const options = custom
+      ? {
+          maxHeight: customHeight,
+          maxWidth: customWidth,
+          isVertical,
+        }
+      : TypeOfPrintMapping[selectedItem];
+
+    options.imagePaths = paths.map(path => {
+      return {
+        path,
+        numberOfCopies: n_copies
+      }
+    });
     options.forceSize = forceSize;
     console.log(options);
     const response = await fetch(
@@ -288,8 +296,18 @@ function App() {
               onChange={handleForceSizeChange}
             />
           </div>
+          <div className="flex-container">
+            <label style={{width: '70%'}}>N° de copias</label>
+            <input
+              className='input-int'
+              style={{width: '30%', textAlign: 'center'}}
+              type="text"
+              value={n_copies}
+              onChange={getNumericHandleChange(1000, setNCopies, 1)}
+            />
+          </div>
           <div className="custom">
-            <label>Perzonalizado </label>
+            <label>Personalizado </label>
             <input
               type="checkbox"
               checked={custom}
@@ -301,6 +319,7 @@ function App() {
                   <label>Ancho</label>
                   <input
                     type="text"
+                    className='input-int'
                     value={customWidth}
                     onChange={getNumericHandleChange(
                       finalWidth,
@@ -317,6 +336,7 @@ function App() {
                   <label>Alto</label>
                   <input
                     type="text"
+                    className='input-int'
                     value={customHeight}
                     onChange={getNumericHandleChange(
                       finalHeight,
